@@ -7,9 +7,18 @@
 
 import UIKit
 
+enum Sections: Int{
+    case TrendingMovies = 0
+    case TrendingTv = 1
+    case Popular = 2
+    case Upcoming = 3
+    case TopRated = 4
+}
+
 class HomeViewController: UIViewController {
     
     let sectionTitles: [String] = ["Trending Movies","Trending Tv", "Popular","Upcoming Movies","Top rated"]
+    private var titles: [Title] = [Title]()
     
     private let homeFeeTable: UITableView = {
         let table = UITableView(frame: .zero,style: .grouped)
@@ -30,7 +39,6 @@ class HomeViewController: UIViewController {
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeeTable.tableHeaderView = headerView
         
-        fetchData()
     }
     
     private func configureNavbar(){
@@ -50,19 +58,7 @@ class HomeViewController: UIViewController {
         homeFeeTable.frame = view.bounds
     }
     
-    private func fetchData(){
-        //APICaller.shared.getTrendingMovies{ _ in}
-        
-//        APICaller.shared.getTrendingMovies{results in switch results{
-//            case .success(let movies):
-//                print(movies)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-        
-        APICaller.shared.getTrendingTvs{results in} 
-    }
+    
     
     /*
     // MARK: - Navigation
