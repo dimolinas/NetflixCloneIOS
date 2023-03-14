@@ -31,8 +31,8 @@
             filePath = "Netflix Clone/Controllers/General/SearchResultsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Actions>
@@ -55,8 +55,8 @@
             filePath = "Netflix Clone/Controllers/General/SearchResultsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "SearchResultsViewController"
             landmarkType = "3">
          </BreakpointContent>

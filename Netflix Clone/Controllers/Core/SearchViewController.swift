@@ -64,17 +64,6 @@ class SearchViewController: UIViewController {
         super.viewDidLayoutSubviews()
         discoverTable.frame = view.bounds
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -120,7 +109,7 @@ extension SearchViewController:UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-extension SearchViewController: UISearchResultsUpdating{
+extension SearchViewController: UISearchResultsUpdating, SearchResultsViewControllerDelegate{
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         
@@ -128,6 +117,8 @@ extension SearchViewController: UISearchResultsUpdating{
               !query.trimmingCharacters(in: .whitespaces).isEmpty,
               query.trimmingCharacters(in: .whitespaces).count >= 3,
               let resultsController = searchController.searchResultsController as? SearchResultsViewController else {return}
+        
+        resultsController.delegate = self
         
         APICaller.shared.self.search(with: query){ result in DispatchQueue.main.sync {
             switch result{
@@ -139,6 +130,23 @@ extension SearchViewController: UISearchResultsUpdating{
             }
         }
             
+        }
+    }
+    
+    func searchResultsViewControllerDelegateDidTapItem(_ viewModel: TitlePreviewViewModel) {
+        DispatchQueue.main.sync { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
+    
+    func searchResultsViewControllerDidTapItem(_ viewModel:TitlePreviewViewModel){
+        DispatchQueue.main.sync { [weak self] in
+            let vc  = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

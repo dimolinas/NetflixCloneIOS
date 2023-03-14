@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
     private var headerView: HeroHeaderUIView?
     
     let sectionTitles: [String] = ["Trending Movies","Trending Tv", "Popular","Upcoming Movies","Top rated"]
+    
     private var titles: [Title] = [Title]()
     
     private let homeFeeTable: UITableView = {

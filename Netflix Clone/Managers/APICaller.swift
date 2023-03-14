@@ -10,7 +10,7 @@ import Foundation
 struct Constants {
     static let API_KEY = "03be78d134e2a0a09cb0167b2c4954c8"
     static let baseURL = "https://api.themoviedb.org"
-    static let YoutubeAPI_KEY = "AIzaSyCkFDX3MamejuW2xNCYHbeJBw9stsksxLs"
+    static let YoutubeAPI_KEY = "AIzaSyCW0-mOqdy2buXgkC09jN0tcgSXfS8yVaU"
     static let YoutubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search?"
 }
 
@@ -29,7 +29,7 @@ class APICaller{
                 return
             }
             do {
-                //print("data:",data)
+                print("data:",data)
                 //let results = try JSONSerialization.jsonObject(with: data,options: .fragmentsAllowed)
                 //print(results.results[0])
                 let results = try JSONDecoder().decode(TrendingTitleResponse.self, from: data )
@@ -158,7 +158,6 @@ class APICaller{
         
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return }
         guard let url = URL(string:"\(Constants.YoutubeBaseURL)q=\(query)&key=\(Constants.YoutubeAPI_KEY)") else {return}
-        
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)){
             data, _, error in guard let data, error == nil else {
                 return
@@ -166,10 +165,12 @@ class APICaller{
             do{
                 let results = try JSONDecoder().decode(YoutubeSearchResponse.self, from: data )
                 completion(.success(results.items[0]))
+                print(results)
 
             }catch{
                 completion(.failure(error))
                 print(error.localizedDescription)
+                print("erro")
             }
         }
         task.resume()
